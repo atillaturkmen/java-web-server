@@ -31,11 +31,11 @@ public class ServerThread implements Runnable {
                     System.out.println(clientAddress + " closed the connection.");
                     break;
                 }
-                System.out.println(this + " sent: " + clientSentence);
+                System.out.println(clientAddress + " sent: " + clientSentence);
                 // start of the critical section
                 writerLock.P();
                 FileWriter writer = new FileWriter("db.txt", true);
-                writer.write(clientAddress + " " + clientSentence);
+                writer.write(clientAddress + " " + clientSentence + "\n");
                 writer.close();
                 writerLock.V();
                 // end of critical section
